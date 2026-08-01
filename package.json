@@ -1,6 +1,6 @@
 {
   "name": "@tanstack/svelte-start",
-  "version": "0.0.3-experimental",
+  "version": "0.0.4-experimental",
   "description": "Full-stack TanStack Start for Svelte — community port; mirrors @tanstack/vue-start.",
   "license": "MIT",
   "repository": {
@@ -82,9 +82,9 @@
     "@tanstack/start-client-core": "^1.170.14",
     "@tanstack/start-plugin-core": "^1.171.24",
     "@tanstack/start-server-core": "^1.169.17",
-    "@tanstack/svelte-router": "github:y7ya-com/svelte-router#v0.0.3-experimental",
-    "@tanstack/svelte-start-client": "github:y7ya-com/svelte-start-client#v0.0.3-experimental",
-    "@tanstack/svelte-start-server": "github:y7ya-com/svelte-start-server#v0.0.3-experimental",
+    "@tanstack/svelte-router": "github:y7ya-com/svelte-router#v0.0.4-experimental",
+    "@tanstack/svelte-start-client": "github:y7ya-com/svelte-start-client#v0.0.4-experimental",
+    "@tanstack/svelte-start-server": "github:y7ya-com/svelte-start-server#v0.0.4-experimental",
     "pathe": "^2.0.3",
     "@tanstack/router-core": "^1.171.15"
   },
