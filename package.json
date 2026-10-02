@@ -1,11 +1,11 @@
 {
   "name": "@tanstack/svelte-start",
-  "version": "0.0.6-experimental",
-  "description": "Full-stack TanStack Start for Svelte — community port; mirrors @tanstack/vue-start.",
+  "version": "0.0.8-experimental",
+  "description": "Modern and scalable routing for Svelte applications",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/y7ya-com/router.git",
+    "url": "git+https://github.com/TanStack/router.git",
     "directory": "packages/svelte-start"
   },
   "funding": {
@@ -25,50 +25,72 @@
   "module": "dist/index.js",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
     },
     "./client": {
-      "types": "./dist/client.d.ts",
-      "svelte": "./dist/client.js",
-      "import": "./dist/client.js"
+      "import": {
+        "types": "./dist/client.d.ts",
+        "svelte": "./dist/client.js",
+        "default": "./dist/client.js"
+      }
     },
     "./server": {
-      "types": "./dist/server.d.ts",
-      "import": "./dist/server.js"
+      "import": {
+        "types": "./dist/server.d.ts",
+        "default": "./dist/server.js"
+      }
     },
     "./client-rpc": {
-      "types": "./dist/client-rpc.d.ts",
-      "import": "./dist/client-rpc.js"
+      "import": {
+        "types": "./dist/client-rpc.d.ts",
+        "default": "./dist/client-rpc.js"
+      }
     },
     "./server-rpc": {
-      "types": "./dist/server-rpc.d.ts",
-      "import": "./dist/server-rpc.js"
+      "import": {
+        "types": "./dist/server-rpc.d.ts",
+        "default": "./dist/server-rpc.js"
+      }
     },
     "./ssr-rpc": {
-      "types": "./dist/ssr-rpc.d.ts",
-      "import": "./dist/ssr-rpc.js"
+      "import": {
+        "types": "./dist/ssr-rpc.d.ts",
+        "default": "./dist/ssr-rpc.js"
+      }
     },
     "./client-only": {
-      "types": "./dist/client-only.d.ts",
-      "import": "./dist/client-only.js"
+      "import": {
+        "types": "./dist/client-only.d.ts",
+        "default": "./dist/client-only.js"
+      }
     },
     "./server-only": {
-      "types": "./dist/server-only.d.ts",
-      "import": "./dist/server-only.js"
+      "import": {
+        "types": "./dist/server-only.d.ts",
+        "default": "./dist/server-only.js"
+      }
     },
     "./plugin/vite": {
-      "types": "./dist/plugin/vite.d.ts",
-      "import": "./dist/plugin/vite.js"
+      "import": {
+        "types": "./dist/plugin/vite.d.ts",
+        "default": "./dist/plugin/vite.js"
+      }
     },
     "./plugin/rsbuild": {
-      "types": "./dist/plugin/rsbuild.d.ts",
-      "import": "./dist/plugin/rsbuild.js"
+      "import": {
+        "types": "./dist/plugin/rsbuild.d.ts",
+        "default": "./dist/plugin/rsbuild.js"
+      }
     },
     "./package.json": "./package.json",
     "./server-entry": {
-      "types": "./dist/default-entry/server.d.ts",
-      "import": "./dist/default-entry/server.js"
+      "import": {
+        "types": "./dist/default-entry/server.d.ts",
+        "default": "./dist/default-entry/server.js"
+      }
     }
   },
   "files": [
@@ -79,14 +101,14 @@
     "node": ">=12"
   },
   "dependencies": {
-    "@tanstack/start-client-core": "^1.170.14",
-    "@tanstack/start-plugin-core": "^1.171.24",
-    "@tanstack/start-server-core": "^1.169.17",
-    "@tanstack/svelte-router": "github:y7ya-com/svelte-router#v0.0.6-experimental",
-    "@tanstack/svelte-start-client": "github:y7ya-com/svelte-start-client#v0.0.6-experimental",
-    "@tanstack/svelte-start-server": "github:y7ya-com/svelte-start-server#v0.0.6-experimental",
+    "@tanstack/start-client-core": "^1.170.34",
+    "@tanstack/start-plugin-core": "github:y7ya-com/start-plugin-core#v0.0.8-experimental",
+    "@tanstack/start-server-core": "^1.169.39",
+    "@tanstack/svelte-router": "github:y7ya-com/svelte-router#v0.0.8-experimental",
+    "@tanstack/svelte-start-client": "github:y7ya-com/svelte-start-client#v0.0.8-experimental",
+    "@tanstack/svelte-start-server": "github:y7ya-com/svelte-start-server#v0.0.8-experimental",
     "pathe": "^2.0.3",
-    "@tanstack/router-core": "^1.171.15"
+    "@tanstack/router-core": "^1.171.34"
   },
   "peerDependencies": {
     "@rsbuild/core": "^2.0.0",

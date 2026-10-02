@@ -14,21 +14,29 @@ export function tanstackStart(options) {
         {
             name: 'tanstack-svelte-start:config',
             // vite-plugin-svelte auto-externalizes the *dependencies* of every
-            // svelte library it detects — which puts @tanstack/start-server-core on
-            // ssr.resolve.external. Explicit external beats noExternal, so in dev
-            // the package is loaded by real Node and its `#tanstack-router-entry`
-            // import dies (that specifier only exists as a Vite alias). Strip the
-            // start packages back off the explicit-external list.
-            configResolved(config) {
-                for (const env of Object.values(config.environments ?? {})) {
-                    const ext = env.resolve?.external;
-                    if (Array.isArray(ext)) {
-                        const keep = ext.filter((e) => typeof e !== 'string' ||
-                            !/^@tanstack\/(start-|svelte-start|svelte-router)/.test(e));
-                        ext.length = 0;
-                        ext.push(...keep);
+            // svelte library it detects in dev — which puts
+            // @tanstack/start-server-core on ssr.resolve.external. Explicit external
+            // beats noExternal, so the package would be loaded by real Node and its
+            // `#tanstack-router-entry` import dies (that specifier only exists as a
+            // Vite alias). Strip the start packages back off the external list.
+            // An environment that bundles every dependency (`noExternal: true`, e.g.
+            // a Cloudflare worker) cannot have externals at all, so it is cleared.
+            // Runs before other plugins validate the resolved config.
+            configResolved: {
+                order: 'pre',
+                handler(config) {
+                    for (const env of Object.values(config.environments ?? {})) {
+                        const ext = env.resolve?.external;
+                        if (Array.isArray(ext)) {
+                            const keep = env.resolve.noExternal === true
+                                ? []
+                                : ext.filter((e) => typeof e !== 'string' ||
+                                    !/^@tanstack\/(start-|svelte-start|svelte-router)/.test(e));
+                            ext.length = 0;
+                            ext.push(...keep);
+                        }
                     }
-                }
+                },
             },
             configEnvironment(environmentName, options) {
                 return {
@@ -73,15 +81,16 @@ export function tanstackStart(options) {
                             // whose unconditional `node:async_hooks` import becomes
                             // vite's browser-external stub in a prebundle and throws
                             // "AsyncLocalStorage is not a constructor" at import time.
+                            // Nested ids, since an app does not depend on these directly.
                             include: [
-                                '@tanstack/router-core',
-                                '@tanstack/router-core/isServer',
-                                '@tanstack/router-core/ssr/client',
-                                '@tanstack/history',
-                                '@tanstack/store',
-                                '@tanstack/svelte-store',
-                                'devalue',
-                                'isbot',
+                                '@tanstack/svelte-start > @tanstack/router-core',
+                                '@tanstack/svelte-start > @tanstack/router-core/isServer',
+                                '@tanstack/svelte-start > @tanstack/router-core/ssr/client',
+                                '@tanstack/svelte-start > @tanstack/svelte-router > @tanstack/history',
+                                '@tanstack/svelte-start > @tanstack/svelte-router > @tanstack/svelte-store',
+                                '@tanstack/svelte-start > @tanstack/svelte-router > @tanstack/svelte-store > @tanstack/store',
+                                '@tanstack/svelte-start > @tanstack/svelte-router > isbot',
+                                '@tanstack/svelte-start > @tanstack/start-client-core > seroval',
                             ],
                         }
                         : undefined,
